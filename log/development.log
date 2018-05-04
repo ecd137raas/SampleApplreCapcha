@@ -1,0 +1,548 @@
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (156.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (175.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSignups (20180429195241)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "signups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "password" varchar, "email" varchar, "comments" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180429195241"]]
+  [1m[35m (215.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-04-29 19:53:21.065812"], ["updated_at", "2018-04-29 19:53:21.065812"]]
+  [1m[35m (74.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2018-04-29 17:08:14 -0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (101.9ms)
+  Rendered signups/new.html.erb within layouts/application (109.2ms)
+Completed 200 OK in 2304ms (Views: 2210.3ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/signups" for 127.0.0.1 at 2018-04-29 17:08:44 -0300
+Processing by SignupsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"IVfF9xA4EY81vi1A478saU7i9qSP81FBfQtlSQuIQeptOYku3wvBq4DIQahogQp+yn8gsjAMTauaQmpXyi3aKg==", "signup"=>{"name"=>"José", "password"=>"[FILTERED]", "email"=>"emee@fdfdk", "comments"=>"dkjdf"}, "commit"=>"Create Signup"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "signups" ("name", "password", "email", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "José"], ["password", "99899e"], ["email", "emee@fdfdk"], ["comments", "dkjdf"], ["created_at", "2018-04-29 20:08:44.680580"], ["updated_at", "2018-04-29 20:08:44.680580"]]
+  [1m[35m (149.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups/1
+Completed 302 Found in 165ms (ActiveRecord: 151.2ms)
+
+
+Started GET "/signups/1" for 127.0.0.1 at 2018-04-29 17:08:45 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSignup Load (0.8ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 89ms (Views: 54.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/signups/1" for 127.0.0.1 at 2018-04-29 17:08:58 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 73ms (Views: 60.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:09:01 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.7ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 66ms (Views: 61.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:09:03 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (7.5ms)
+  Rendered signups/new.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 127ms (Views: 125.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signups" for 127.0.0.1 at 2018-04-29 17:09:08 -0300
+Processing by SignupsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1PAZF4gL2/HcXnk7MTo32BsjnwB9w69rj8uW9emTETI1v30tXsQm0K+MDI+CZwrV1hVqfAr+Q5IRy9tT4gwGQQ==", "signup"=>{"name"=>"", "password"=>"[FILTERED]", "email"=>"", "comments"=>""}, "commit"=>"Create Signup"}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "signups" ("name", "password", "email", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", ""], ["password", ""], ["email", ""], ["comments", ""], ["created_at", "2018-04-29 20:09:08.318888"], ["updated_at", "2018-04-29 20:09:08.318888"]]
+  [1m[35m (119.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups/2
+Completed 302 Found in 135ms (ActiveRecord: 120.7ms)
+
+
+Started GET "/signups/2" for 127.0.0.1 at 2018-04-29 17:09:08 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 57ms (Views: 51.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:09:11 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 57ms (Views: 53.4ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/signups/2" for 127.0.0.1 at 2018-04-29 17:09:15 -0300
+Processing by SignupsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"TuUg/d4nVjTXSvJ5LUiUhqOTg1zdL36VlCyZV+W/fH0Ci2wkERSGEGI8npGmdrKRJw5VSmLQYn9zZZZJJBrnvQ==", "id"=>"2"}
+  [1m[36mSignup Load (0.7ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (6.3ms)[0m  [1m[31mDELETE FROM "signups" WHERE "signups"."id" = ?[0m  [["id", 2]]
+  [1m[35m (112.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups
+Completed 302 Found in 131ms (ActiveRecord: 119.4ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:09:16 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 56ms (Views: 52.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:09:56 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (7.8ms)
+  Rendered signups/new.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 81ms (Views: 76.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:09:58 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 117ms (Views: 114.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:10:01 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (11.7ms)
+  Rendered signups/new.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 97ms (Views: 93.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:10:03 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.7ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 96ms (Views: 91.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:10:28 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.2ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 77ms (Views: 73.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:10:31 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (14.0ms)
+  Rendered signups/new.html.erb within layouts/application (17.6ms)
+Completed 200 OK in 142ms (Views: 138.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signups" for 127.0.0.1 at 2018-04-29 17:10:37 -0300
+Processing by SignupsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LWSKmsTI/EshugKHHFYjudy8NkbfnaaMC9PhY83vn4LMK+6gEgcBalJodzOvCx60EYrDOqigSnWV06zFxnCI8Q==", "signup"=>{"name"=>"", "password"=>"[FILTERED]", "email"=>"", "comments"=>""}, "commit"=>"Create Signup"}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (3.9ms)[0m  [1m[32mINSERT INTO "signups" ("name", "password", "email", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", ""], ["password", ""], ["email", ""], ["comments", ""], ["created_at", "2018-04-29 20:10:37.549782"], ["updated_at", "2018-04-29 20:10:37.549782"]]
+  [1m[35m (80.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups/3
+Completed 302 Found in 98ms (ActiveRecord: 85.0ms)
+
+
+Started GET "/signups/3" for 127.0.0.1 at 2018-04-29 17:10:37 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mSignup Load (0.4ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 58ms (Views: 53.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:10:40 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 77ms (Views: 72.7ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/signups/3" for 127.0.0.1 at 2018-04-29 17:10:44 -0300
+Processing by SignupsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ioJk110FdsNo6Hexq433xYxsL1J/q5mkEwXqYrRcGDvG7CgOkjam592eG1kgs9HSCPH5RMBUhU70TOV8dfmD+w==", "id"=>"3"}
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "signups" WHERE "signups"."id" = ?[0m  [["id", 3]]
+  [1m[35m (81.5ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups
+Completed 302 Found in 93ms (ActiveRecord: 82.5ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:10:44 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 54ms (Views: 50.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:11:58 -0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (50.9ms)
+Completed 200 OK in 584ms (Views: 556.5ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:12:02 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (39.4ms)
+  Rendered signups/new.html.erb within layouts/application (43.3ms)
+Completed 200 OK in 112ms (Views: 106.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups/1" for 127.0.0.1 at 2018-04-29 17:12:33 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 61ms (Views: 52.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:12:35 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.3ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 78ms (Views: 74.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:13:29 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 59ms (Views: 54.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:13:32 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (9.1ms)
+  Rendered signups/new.html.erb within layouts/application (12.4ms)
+Completed 200 OK in 70ms (Views: 66.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:13:36 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (9.5ms)
+  Rendered signups/new.html.erb within layouts/application (12.4ms)
+Completed 200 OK in 61ms (Views: 57.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signups" for 127.0.0.1 at 2018-04-29 17:13:43 -0300
+Processing by SignupsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/k1I8C1akYN14fmnzRstd2jmwHUXqvpi9V5GdhfvinCyIwQp4mlBp8CXlU9GJQtg7HsWY6hV5ogSF0lo1koRsA==", "signup"=>{"name"=>"ff", "password"=>"[FILTERED]", "email"=>"fff", "comments"=>"ff"}, "commit"=>"Create Signup"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (3.8ms)[0m  [1m[32mINSERT INTO "signups" ("name", "password", "email", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "ff"], ["password", "fff"], ["email", "fff"], ["comments", "ff"], ["created_at", "2018-04-29 20:13:43.171890"], ["updated_at", "2018-04-29 20:13:43.171890"]]
+  [1m[35m (86.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups/4
+Completed 302 Found in 104ms (ActiveRecord: 89.9ms)
+
+
+Started GET "/signups/4" for 127.0.0.1 at 2018-04-29 17:13:43 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mSignup Load (0.4ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 53ms (Views: 48.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:13:47 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 64ms (Views: 60.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signups/4" for 127.0.0.1 at 2018-04-29 17:13:50 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mSignup Load (0.4ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 60ms (Views: 54.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/signups/4" for 127.0.0.1 at 2018-04-29 17:13:58 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 65ms (Views: 58.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:14:01 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 52ms (Views: 49.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signups/4" for 127.0.0.1 at 2018-04-29 17:14:03 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mSignup Load (0.3ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 59ms (Views: 54.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:15:12 -0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.3ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (54.6ms)
+Completed 200 OK in 625ms (Views: 593.3ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:15:18 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (42.5ms)
+  Rendered signups/new.html.erb within layouts/application (45.2ms)
+Completed 200 OK in 107ms (Views: 102.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:15:20 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.8ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 65ms (Views: 61.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-29 17:15:25 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (9.5ms)
+  Rendered signups/new.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 70ms (Views: 66.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-29 17:17:09 -0300
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (37.7ms)
+  Rendered signups/new.html.erb within layouts/application (42.9ms)
+Completed 200 OK in 639ms (Views: 590.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-29 17:17:14 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (8.2ms)
+  Rendered signups/new.html.erb within layouts/application (12.4ms)
+Completed 200 OK in 61ms (Views: 57.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signups" for 127.0.0.1 at 2018-04-29 17:17:23 -0300
+Processing by SignupsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ddue1WOh8EdTmqZnLjEt4IQtjmQ0LUvlf5AvJPhfRTg5tdIMrJIgY+bsyo+lDwv3ALBYcovSVw+Y2SA6Ofre+A==", "signup"=>{"name"=>"tt", "password"=>"[FILTERED]", "email"=>"tt", "comments"=>"tt"}, "commit"=>"Create Signup"}
+  [1m[35m (0.6ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (5.7ms)[0m  [1m[32mINSERT INTO "signups" ("name", "password", "email", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "tt"], ["password", "tt"], ["email", "tt"], ["comments", "tt"], ["created_at", "2018-04-29 20:17:23.882768"], ["updated_at", "2018-04-29 20:17:23.882768"]]
+  [1m[35m (84.8ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups/5
+Completed 302 Found in 109ms (ActiveRecord: 91.1ms)
+
+
+Started GET "/signups/5" for 127.0.0.1 at 2018-04-29 17:17:24 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSignup Load (0.7ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 73ms (Views: 57.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/signups/5/edit" for 127.0.0.1 at 2018-04-29 17:17:27 -0300
+Processing by SignupsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering signups/edit.html.erb within layouts/application
+  Rendered signups/_form.html.erb (8.1ms)
+  Rendered signups/edit.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 63ms (Views: 57.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:17:30 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 59ms (Views: 54.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups/5/edit" for 127.0.0.1 at 2018-04-29 17:18:16 -0300
+Processing by SignupsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSignup Load (0.5ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering signups/edit.html.erb within layouts/application
+  Rendered signups/_form.html.erb (11.2ms)
+  Rendered signups/edit.html.erb within layouts/application (14.9ms)
+Completed 200 OK in 81ms (Views: 74.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:18:21 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.8ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 89ms (Views: 84.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:18:24 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (9.6ms)
+  Rendered signups/new.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 80ms (Views: 75.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:21:08 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (8.1ms)
+  Rendered signups/new.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 68ms (Views: 64.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:21:28 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.9ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 57ms (Views: 52.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:21:31 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (9.9ms)
+  Rendered signups/new.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 66ms (Views: 62.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:27:30 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (362.4ms)
+  Rendered signups/new.html.erb within layouts/application (364.8ms)
+Completed 500 Internal Server Error in 374ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `password' for #<ActionView::Helpers::FormBuilder:0x00007f0211136130>
+Did you mean?  password_field):
+    19: 
+    20:   <div class="field">
+    21:     <%= form.label :password %>
+    22:     <%= form.password :password, id: :signup_password %>
+    23:   </div>
+    24: 
+    25:   <div class="field">
+  
+app/views/signups/_form.html.erb:22:in `block in _app_views_signups__form_html_erb___1770803093751686861_69823426733480'
+app/views/signups/_form.html.erb:1:in `_app_views_signups__form_html_erb___1770803093751686861_69823426733480'
+app/views/signups/new.html.erb:3:in `_app_views_signups_new_html_erb__57780297410463635_69823426841320'
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:27:45 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (16.9ms)
+  Rendered signups/new.html.erb within layouts/application (21.9ms)
+Completed 200 OK in 113ms (Views: 109.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signups" for 127.0.0.1 at 2018-04-29 17:28:05 -0300
+Processing by SignupsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wg1v/PRHCsbJVEPEm/bF+UNNzt1ehk2j/DB/1x8jBYsWYyMlO3Ta4nwiLywQyOPux9AYy+F5UUkbeXDJ3oaeSw==", "signup"=>{"name"=>"rrr", "password"=>"[FILTERED]", "email"=>"rrr", "comments"=>"rrr"}, "commit"=>"Create Signup", "g-recaptcha-response"=>""}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (2.9ms)[0m  [1m[32mINSERT INTO "signups" ("name", "password", "email", "comments", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "rrr"], ["password", "rrr"], ["email", "rrr"], ["comments", "rrr"], ["created_at", "2018-04-29 20:28:05.352456"], ["updated_at", "2018-04-29 20:28:05.352456"]]
+  [1m[35m (63.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups/6
+Completed 302 Found in 88ms (ActiveRecord: 66.6ms)
+
+
+Started GET "/signups/6" for 127.0.0.1 at 2018-04-29 17:28:05 -0300
+Processing by SignupsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSignup Load (0.3ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering signups/show.html.erb within layouts/application
+  Rendered signups/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 118ms (Views: 109.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:28:11 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.6ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 65ms (Views: 61.3ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/signups/4" for 127.0.0.1 at 2018-04-29 17:28:18 -0300
+Processing by SignupsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"SV8CPdqOZ2rLcKNacN/m4LpZDbn2P2QR5k5PLWhzSlQFMU7kFb23Tn4Gz7L74cD3PsTbr0nAePsBB0AzqdbRlA==", "id"=>"4"}
+  [1m[36mSignup Load (0.3ms)[0m  [1m[34mSELECT  "signups".* FROM "signups" WHERE "signups"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM "signups" WHERE "signups"."id" = ?[0m  [["id", 4]]
+  [1m[35m (94.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/signups
+Completed 302 Found in 106ms (ActiveRecord: 95.4ms)
+
+
+Started GET "/signups" for 127.0.0.1 at 2018-04-29 17:28:18 -0300
+Processing by SignupsController#index as HTML
+  Rendering signups/index.html.erb within layouts/application
+  [1m[36mSignup Load (0.8ms)[0m  [1m[34mSELECT "signups".* FROM "signups"[0m
+  Rendered signups/index.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 63ms (Views: 59.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/signups/new" for 127.0.0.1 at 2018-04-29 17:28:21 -0300
+Processing by SignupsController#new as HTML
+  Rendering signups/new.html.erb within layouts/application
+  Rendered signups/_form.html.erb (9.6ms)
+  Rendered signups/new.html.erb within layouts/application (14.1ms)
+Completed 200 OK in 81ms (Views: 78.0ms | ActiveRecord: 0.0ms)
+
+
